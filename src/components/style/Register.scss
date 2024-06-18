@@ -1,0 +1,68 @@
+/* Register.css */
+body {
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+  }
+  
+  .register-w3 {
+    width: 100%;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px 25px;
+    background: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+  }
+  
+  .w3layouts-main {
+    text-align: center;
+  }
+  
+  .w3layouts-main h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+  }
+  
+  .w3layouts-main form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .w3layouts-main input[type="text"],
+  .w3layouts-main input[type="email"],
+  .w3layouts-main input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .w3layouts-main input[type="submit"] {
+    padding: 10px;
+    background: #4caf50;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .w3layouts-main input[type="submit"]:hover {
+    background: #45a049;
+  }
+  
+  .w3layouts-main p {
+    margin-top: 20px;
+  }
+  
+  .w3layouts-main p a {
+    color: #4caf50;
+    text-decoration: none;
+  }
+  
+  .w3layouts-main p a:hover {
+    text-decoration: underline;
+  }
