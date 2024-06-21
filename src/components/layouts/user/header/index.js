@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from "react";
+// import React, { useState, useEffect } from "react";
 import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Header = (props) => {
-  console.log(props.user);
   return (
     <Navbar expand="lg" bg="light" variant="light">
       <Container>
         <Navbar.Brand>
-          {" "}
           <h1>PERFUME</h1>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -29,11 +27,12 @@ const Header = (props) => {
           </Nav>
         </Navbar.Collapse>
       </Container>
-
-      <Nav.Link href="/login">
-        {props.isLogin && <h5>Hello {props.user?.name}</h5>}
-        {!props.isLogin && <h5>Đăng nhập</h5>}
-      </Nav.Link>
+      {!props.isLogin && (
+        <Nav.Link href="/login">
+          <h5>Đăng nhập</h5>
+        </Nav.Link>
+      )}
+      {props.isLogin && <h5> Xin chào {props.user?.name}</h5>}
     </Navbar>
   );
 };

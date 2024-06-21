@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { login } from "../api/auth";
 import { useNavigate } from "react-router-dom";
-import "./style/Login.scss";
+import "../assets/style/Login.scss";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -14,10 +14,10 @@ const Login = () => {
     e.preventDefault();
     try {
       const data = await login(email, password);
-      if (data.role == "admin") {
-        navigate("/dashboard");
+      if (data.role === "admin") {
+        navigate("/admin");
       } else {
-        navigate("/");
+        navigate("/home");
       }
       // Chuyển hướng đến dashboard sau khi đăng nhập thành công
     } catch (err) {
@@ -48,9 +48,6 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          {/* <h6>
-            <a href="#">Forgot Password?</a>
-          </h6> */}
           <div className="clearfix"></div>
           {error && <p className="error">{error}</p>}
           <input type="submit" value="Sign In" name="login" />
