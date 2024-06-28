@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { register } from '../api/auth';
 import { useNavigate } from 'react-router-dom';
 
-import './style/Register.scss';
+import '../assets/style/Register.scss';
 
 const Register = () => {
     const [username, setUsername] = useState('');

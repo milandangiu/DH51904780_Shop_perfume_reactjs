@@ -18,6 +18,7 @@ const Login = () => {
         navigate("/admin");
       } else {
         navigate("/home");
+        window.location.reload();
       }
       // Chuyển hướng đến dashboard sau khi đăng nhập thành công
     } catch (err) {
@@ -28,13 +29,13 @@ const Login = () => {
   return (
     <div className="log-w3">
       <div className="w3layouts-main">
-        <h2>Sign In Now</h2>
+        <h2>Đăng nhập</h2>
         <form onSubmit={handleSubmit}>
           <input
             type="email"
             className="ggg"
             name="Email"
-            placeholder="E-MAIL"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -43,17 +44,17 @@ const Login = () => {
             type="password"
             className="ggg"
             name="Password"
-            placeholder="PASSWORD"
+            placeholder="Mật khẩu"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
           <div className="clearfix"></div>
           {error && <p className="error">{error}</p>}
-          <input type="submit" value="Sign In" name="login" />
+          <input type="submit" value="Đăng nhập" name="login" />
         </form>
         <p>
-          Don't Have an Account ?<a href="/register">Create an account</a>
+          Bạn chưa có tài khoản ?<a href="/register">Đăng kí ngay bây giờ</a>
         </p>
       </div>
     </div>

@@ -1,20 +1,23 @@
-.add-product-form-container {
-  max-width: 600px;
+.update-product-box {
+  padding: 65px 0;
+}
+.update-product-form-container {
+  max-width: 500px;
   margin: 0 auto;
-  padding: 70px;
+  padding: 20px;
   border: 1px solid #ddd;
   border-radius: 5px;
   background-color: #f9f9f9;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.add-product-form-container h2 {
+.update-product-form-container h2 {
   text-align: center;
   color: #333;
   margin-bottom: 20px;
 }
 
-.add-product-form {
+.update-product-form {
   margin-top: 20px;
 }
 
@@ -43,6 +46,14 @@
   border-color: #007bff;
   outline: none;
 }
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 10px auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
 
 .btn-submit {
   width: 100%;
@@ -60,7 +71,7 @@
   background-color: #0056b3;
 }
 
-/* Thêm CSS cho thông báo */
+/* CSS cho thông báo */
 .message-container {
   position: fixed;
   top: 50%;

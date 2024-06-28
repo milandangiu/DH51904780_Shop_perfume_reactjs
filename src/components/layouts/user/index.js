@@ -22,9 +22,11 @@ const AnonymousLayout = () => {
       setUser(_response.data);
     }
   }, []);
+
+  
   return (
     <div>
-      <Header isLogin={isLogin} user={user}></Header>
+      <Header isLogin={isLogin} setLogin={setIsLogin} user={user}></Header>
       <Outlet />
       <Footer></Footer>
     </div>

@@ -1,9 +1,16 @@
 // import React, { useState, useEffect } from "react";
 import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
+import { useNavigate } from 'react-router-dom'; // Đúng thư viện
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Header = (props) => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem('userToken');
+    props.setLogin(false);
+    navigate('/home');
+  };
   return (
     <Navbar expand="lg" bg="light" variant="light">
       <Container>
@@ -27,12 +34,19 @@ const Header = (props) => {
           </Nav>
         </Navbar.Collapse>
       </Container>
+
       {!props.isLogin && (
         <Nav.Link href="/login">
           <h5>Đăng nhập</h5>
         </Nav.Link>
       )}
-      {props.isLogin && <h5> Xin chào {props.user?.name}</h5>}
+
+      {props.isLogin && (
+        <Nav.Link>
+          <h5>Xin chào {props.user?.name}</h5>
+          <button onClick={handleLogout}>Đăng xuất</button>
+        </Nav.Link>
+      )}
     </Navbar>
   );
 };

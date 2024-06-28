@@ -20,42 +20,42 @@ const ProductDetail = () => {
   }, []);
   return (
     <div>
-      <section class="py-5 pt-0">
-        <div class="container px-4 px-lg-5 my-5">
-          <div class="row gx-4 gx-lg-5 align-items-center">
-            <div class="col-md-6">
+      <section className="py-5 pt-0">
+        <div className="container px-4 px-lg-5 my-5">
+          <div className="row gx-4 gx-lg-5 align-items-center">
+            <div className="col-md-6">
               <img
-                class="card-img-top mb-5 mb-md-0"
+                className="card-img-top mb-5 mb-md-0"
                 src={product.image}
                 id={product.id}
-                alt={product.product_name}
+                alt={product.product_namen}
               />
             </div>
-            <div class="col-md-6">
-              <div class="small mb-1">SKU: BST-498</div>
-              <h1 class="display-5 fw-bolder">{product.product_name}</h1>
-              <div class="fs-5 mb-5">
-                <span class="text-decoration-line-through">$45.00</span>
+            <div className="col-md-6">
+              <div className="small mb-1">SKU: BST-498</div>
+              <h1 className="display-5 fw-bolder">{product.product_name}</h1>
+              <div className="fs-5 mb-5">
+                <span className="text-decoration-line-through">$45.00</span>
                 <span>$40.00</span>
               </div>
-              <p class="lead">
+              <p className="lead">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Praesentium at dolorem quidem modi. Nam sequi consequatur
                 obcaecati excepturi alias magni, accusamus eius blanditiis
                 delectus ipsam minima ea iste laborum vero?
               </p>
-              <div class="d-flex">
+              <div className="d-flex">
                 <input
-                  class="form-control text-center me-3"
+                  className="form-control text-center me-3"
                   id="inputQuantity"
                   type="num"
                   value="1"
                 />
                 <button
-                  class="btn btn-outline-dark flex-shrink-0"
+                  className="btn btn-outline-dark flex-shrink-0"
                   type="button"
                 >
-                  <i class="bi-cart-fill me-1"></i>
+                  <i className="bi-cart-fill me-1"></i>
                   Add to cart
                 </button>
               </div>
@@ -64,118 +64,118 @@ const ProductDetail = () => {
         </div>
       </section>
 
-      <section class="py-5 bg-light">
-        <div class="container px-4 px-lg-5 mt-5">
-          <h2 class="fw-bolder mb-4">Related products</h2>
-          <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            <div class="col mb-5">
-              <div class="card h-100">
+      <section className="py-5 bg-light">
+        <div className="container px-4 px-lg-5 mt-5">
+          <h2 className="fw-bolder mb-4">Related products</h2>
+          <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <div className="col mb-5">
+              <div className="card h-100">
                 <img
-                  class="card-img-top"
+                  className="card-img-top"
                   src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
                   alt="..."
                 />
-                <div class="card-body p-4">
-                  <div class="text-center">
-                    <h5 class="fw-bolder">Fancy Product</h5>
+                <div className="card-body p-4">
+                  <div className="text-center">
+                    <h5 className="fw-bolder">Fancy Product</h5>
                     $40.00 - $80.00
                   </div>
                 </div>
-                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                  <div class="text-center">
-                    <a class="btn btn-outline-dark mt-auto" href="#">
+                <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                  <div className="text-center">
+                    <a className="btn btn-outline-dark mt-auto" href="#">
                       View options
                     </a>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col mb-5">
-              <div class="card h-100">
-                <div class="badge bg-dark text-white position-absolute">
+            <div className="col mb-5">
+              <div className="card h-100">
+                <div className="badge bg-dark text-white position-absolute">
                   Sale
                 </div>
                 <img
-                  class="card-img-top"
+                  className="card-img-top"
                   src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
                   alt="..."
                 />
-                <div class="card-body p-4">
-                  <div class="text-center">
-                    <h5 class="fw-bolder">Special Item</h5>
-                    <div class="d-flex justify-content-center small text-warning mb-2">
-                      <div class="bi-star-fill"></div>
-                      <div class="bi-star-fill"></div>
-                      <div class="bi-star-fill"></div>
-                      <div class="bi-star-fill"></div>
-                      <div class="bi-star-fill"></div>
+                <div className="card-body p-4">
+                  <div className="text-center">
+                    <h5 className="fw-bolder">Special Item</h5>
+                    <div className="d-flex justify-content-center small text-warning mb-2">
+                      <div className="bi-star-fill"></div>
+                      <div className="bi-star-fill"></div>
+                      <div className="bi-star-fill"></div>
+                      <div className="bi-star-fill"></div>
+                      <div className="bi-star-fill"></div>
                     </div>
-                    <span class="text-muted text-decoration-line-through">
+                    <span className="text-muted text-decoration-line-through">
                       $20.00
                     </span>
                     $18.00
                   </div>
                 </div>
-                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                  <div class="text-center">
-                    <a class="btn btn-outline-dark mt-auto" href="#">
+                <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                  <div className="text-center">
+                    <a className="btn btn-outline-dark mt-auto" href="#">
                       Add to cart
                     </a>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col mb-5">
-              <div class="card h-100">
-                <div class="badge bg-dark text-white position-absolute">
+            <div className="col mb-5">
+              <div className="card h-100">
+                <div className="badge bg-dark text-white position-absolute">
                   Sale
                 </div>
                 <img
-                  class="card-img-top"
+                  className="card-img-top"
                   src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
                   alt="..."
                 />
-                <div class="card-body p-4">
-                  <div class="text-center">
-                    <h5 class="fw-bolder">Sale Item</h5>
-                    <span class="text-muted text-decoration-line-through">
+                <div className="card-body p-4">
+                  <div className="text-center">
+                    <h5 className="fw-bolder">Sale Item</h5>
+                    <span className="text-muted text-decoration-line-through">
                       $50.00
                     </span>
                     $25.00
                   </div>
                 </div>
-                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                  <div class="text-center">
-                    <a class="btn btn-outline-dark mt-auto" href="#">
+                <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                  <div className="text-center">
+                    <a className="btn btn-outline-dark mt-auto" href="#">
                       Add to cart
                     </a>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col mb-5">
-              <div class="card h-100">
+            <div className="col mb-5">
+              <div className="card h-100">
                 <img
-                  class="card-img-top"
+                  className="card-img-top"
                   src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
                   alt="..."
                 />
-                <div class="card-body p-4">
-                  <div class="text-center">
-                    <h5 class="fw-bolder">Popular Item</h5>
-                    <div class="d-flex justify-content-center small text-warning mb-2">
-                      <div class="bi-star-fill"></div>
-                      <div class="bi-star-fill"></div>
-                      <div class="bi-star-fill"></div>
-                      <div class="bi-star-fill"></div>
-                      <div class="bi-star-fill"></div>
+                <div className="card-body p-4">
+                  <div className="text-center">
+                    <h5 className="fw-bolder">Popular Item</h5>
+                    <div className="d-flex justify-content-center small text-warning mb-2">
+                      <div className="bi-star-fill"></div>
+                      <div className="bi-star-fill"></div>
+                      <div className="bi-star-fill"></div>
+                      <div className="bi-star-fill"></div>
+                      <div className="bi-star-fill"></div>
                     </div>
                     $40.00
                   </div>
                 </div>
-                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                  <div class="text-center">
-                    <a class="btn btn-outline-dark mt-auto" href="#">
+                <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                  <div className="text-center">
+                    <a className="btn btn-outline-dark mt-auto" href="#">
                       Add to cart
                     </a>
                   </div>
