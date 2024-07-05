@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
-import { useNavigate } from "react-router-dom"; // Import useHistory từ React Router
-
+import { useNavigate } from "react-router-dom";
 import "../../../../assets/style/ListProduct.scss";
-
 import { get_products_async } from "../../../../api/product";
 
 const ListProduct = () => {
@@ -18,7 +15,7 @@ const ListProduct = () => {
     const fetchData = async () => {
       try {
         const _response = await get_products_async();
-        setProducts(_response.data);
+        setProducts(_response.data.data);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -36,7 +33,6 @@ const ListProduct = () => {
     }
     try {
       await axios.delete(`http://127.0.0.1:8000/api/delete-product?id=${id}`);
-      // Sau khi xóa thành công, cập nhật lại danh sách sản phẩm bằng cách gọi API hoặc cập nhật local state
       const updatedProducts = products.filter((product) => product.id !== id);
       setProducts(updatedProducts);
 
@@ -48,7 +44,6 @@ const ListProduct = () => {
 
   const handleEdit = (productId) => {
     console.log(`Chỉnh sửa sản phẩm có id: ${productId}`);
-    // Điều hướng đến trang chỉnh sửa sản phẩm với productId
     navigate(`update/${productId}`);
   };
 
@@ -75,6 +70,33 @@ const ListProduct = () => {
     }
   };
 
+  const formatPrice = (price) => {
+    return price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+  };
+
+  const productElements = currentProducts.map((item) => (
+    <tr key={item.id}>
+      <td>{item.id}</td>
+      <td>{item.product_name}</td>
+      <td>{item.quantity}</td>
+      <td>{formatPrice(item.price)}</td>
+      <td>
+        <button
+          className="btn btn-sm btn-default"
+          onClick={() => handleEdit(item.id)}
+        >
+          Sửa
+        </button>
+        <button
+          className="btn btn-sm btn-danger"
+          onClick={() => handleDelete(item.id)}
+        >
+          Xóa
+        </button>
+      </td>
+    </tr>
+  ));
+
   return (
     <section id="main-content">
       <section className="wrapper">
@@ -88,72 +110,46 @@ const ListProduct = () => {
                   <tr>
                     <th>ID</th>
                     <th>Tên sản phẩm</th>
-                    <th>Thương hiệu</th>
-                    <th>Loại</th>
                     <th>Số lượng</th>
                     <th>Giá</th>
                     <th>Thao tác</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {products.map((item) => (
-                    <tr key={item.id}>
-                      <td>{item.id}</td>
-                      <td>{item.product_name}</td>
-                      <td>{item.brand_name}</td>
-                      <td>{item.type_name}</td>
-                      <td>{item.quantity}</td>
-                      <td>{item.price}</td>
-
-                      <td>
-                        <button
-                          className="btn btn-sm btn-default"
-                          onClick={() => handleEdit(item.id)}
-                        >
-                          Edit
-                        </button>
-                        <button
-                          className="btn btn-sm btn-danger"
-                          onClick={() => handleDelete(item.id)}
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
+                  {productElements}
                 </tbody>
               </table>
-              <div className="d-flex justify-content-between">
-                <button
-                  className="btn btn-outline-primary"
-                  onClick={handlePreviousPage}
-                  disabled={currentPage === 1}
-                >
-                  &larr; Trước
-                </button>
-                <div className="pagination">
-                  {Array.from({ length: totalPages }, (_, index) => (
-                    <button
-                      key={index}
-                      className={`btn ${
-                        currentPage === index + 1
-                          ? "btn-primary"
-                          : "btn-outline-primary"
-                      }`}
-                      onClick={() => handlePageChange(index + 1)}
-                    >
-                      {index + 1}
-                    </button>
-                  ))}
-                </div>
-                <button
-                  className="btn btn-outline-primary"
-                  onClick={handleNextPage}
-                  disabled={currentPage === totalPages}
-                >
-                  Sau &rarr;
-                </button>
+            </div>
+            <div className="d-flex justify-content-between">
+              <button
+                className="btn btn-outline-primary"
+                onClick={handlePreviousPage}
+                disabled={currentPage === 1}
+              >
+                &larr; Trước
+              </button>
+              <div className="pagination">
+                {Array.from({ length: totalPages }, (_, index) => (
+                  <button
+                    key={index}
+                    className={`btn ${
+                      currentPage === index + 1
+                        ? "btn-primary"
+                        : "btn-outline-primary"
+                    }`}
+                    onClick={() => handlePageChange(index + 1)}
+                  >
+                    {index + 1}
+                  </button>
+                ))}
               </div>
+              <button
+                className="btn btn-outline-primary"
+                onClick={handleNextPage}
+                disabled={currentPage === totalPages}
+              >
+                Sau &rarr;
+              </button>
             </div>
           </div>
         </div>
@@ -161,4 +157,5 @@ const ListProduct = () => {
     </section>
   );
 };
+
 export default ListProduct;

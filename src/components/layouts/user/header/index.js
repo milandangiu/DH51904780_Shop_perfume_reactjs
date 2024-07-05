@@ -1,15 +1,17 @@
 // import React, { useState, useEffect } from "react";
 import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
-import { useNavigate } from 'react-router-dom'; // Đúng thư viện
+import { useNavigate, Link } from "react-router-dom"; // Đúng thư viện
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Header = (props) => {
   const navigate = useNavigate();
+
+  
   const handleLogout = () => {
-    localStorage.removeItem('userToken');
+    localStorage.clear();
     props.setLogin(false);
-    navigate('/home');
+    navigate("/home");
   };
   return (
     <Navbar expand="lg" bg="light" variant="light">
@@ -33,6 +35,14 @@ const Header = (props) => {
             <Nav.Link href="/about">Liên hệ</Nav.Link>
           </Nav>
         </Navbar.Collapse>
+        <nav>
+                {/* Các liên kết khác */}
+                <Link to="/cart" className="btn btn-outline-dark">
+                    <i className="bi-cart-fill me-1"></i>
+                    Cart
+                    <span className="badge bg-dark text-white ms-1 rounded-pill">*</span>
+                </Link>
+            </nav>
       </Container>
 
       {!props.isLogin && (

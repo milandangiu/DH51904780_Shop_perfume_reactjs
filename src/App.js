@@ -9,6 +9,9 @@ import UserLayout from "components/layouts/user";
 // for normal user
 import HomePage from "pages/user/homePage";
 import ProductDetail from "pages/user/products/detail";
+import Cart from "pages/user/cart";
+
+
 
 // for admin
 import AdminDashboard from "pages/admin/dashboard";
@@ -58,6 +61,10 @@ const App = () => {
           path: "/san-pham/:id",
           element: <ProductDetail />,
         },
+        {
+          path: "cart",
+          element: <Cart />,
+        },
       ],
     },
     {
@@ -68,6 +75,7 @@ const App = () => {
           path: "home",
           element: <AdminDashboard />,
         },
+        
         {
           path: "products",
           element: <AdminProductList />,

@@ -1,0 +1,19 @@
+.product-description {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .product-controls {
+    gap: 10px; /* Khoảng cách giữa các phần tử */
+  }
+  
+  #inputQuantity {
+    width: 100px; /* Độ rộng của ô nhập số lượng */
+  }
+  
+  
+  .flex-shrink-0 {
+    white-space: nowrap; /* Đảm bảo văn bản không bị xuống dòng */
+  }
+  

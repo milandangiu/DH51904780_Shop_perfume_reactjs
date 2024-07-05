@@ -79,3 +79,12 @@
   font-size: 16px;
   text-align: center;
 }
+.textarea {
+  width: 100%; /* Đảm bảo textarea chiếm toàn bộ chiều rộng của form-group */
+  height: 150px; /* Đặt chiều cao cho textarea, bạn có thể điều chỉnh theo ý muốn */
+  padding: 10px; /* Thêm padding cho textarea */
+  font-size: 16px; /* Đặt kích thước chữ */
+  border: 1px solid #ccc; /* Đặt viền */
+  border-radius: 4px; /* Đặt border-radius */
+  resize: vertical; /* Cho phép người dùng thay đổi kích thước theo chiều dọc */
+}

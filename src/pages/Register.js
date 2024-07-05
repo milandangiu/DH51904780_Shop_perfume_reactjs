@@ -22,11 +22,10 @@ const Register = () => {
         }
         setError('');
         setSuccessMessage('');
-        
-
         try {
             const data = await register(username, email, password);
             setSuccessMessage('Đăng ký thành công!');
+            window.alert('Đăng ký thành công!', 3000); // Show alert for 3 seconds
 
             // Reset form fields
             setUsername('');
@@ -34,6 +33,7 @@ const Register = () => {
             setPassword('');
             setConfirmPassword('');
             navigate('/login');
+
 
         } catch (err) {
             setError('Đăng ký thất bại. Vui lòng kiểm tra lại thông tin.');

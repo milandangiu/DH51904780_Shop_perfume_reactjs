@@ -8,10 +8,8 @@ const UpdateProductForm = () => {
   let { id } = useParams();
   const [productData, setProductData] = useState(null);
   const [productImage, setProductImage] = useState(null);
-
   const [errors, setErrors] = useState({}); // State để lưu trữ lỗi từ server
   const [brands, setBrands] = useState([]);
-  const [types, setTypes] = useState([]);
   const [message, setMessage] = useState(""); // State để lưu trữ thông báo
 
   useEffect(() => {
@@ -28,12 +26,11 @@ const UpdateProductForm = () => {
     // Function to fetch brands and types
     const fetchOptions = async () => {
       try {
-        const [brandRes, typeRes] = await Promise.all([
+        const [brandRes] = await Promise.all([
           axios.get("http://127.0.0.1:8000/api/brands"),
-          axios.get("http://127.0.0.1:8000/api/types"),
         ]);
         setBrands(brandRes.data.data);
-        setTypes(typeRes.data.data);
+
       } catch (error) {
         console.error("Error fetching options:", error);
       }
@@ -75,7 +72,10 @@ const UpdateProductForm = () => {
       const formData = new FormData();
       formData.append("id", productData.id);
       formData.append("product_name", productData.product_name);
-      formData.append("type_name", productData.type_name);
+      formData.append("sex", productData.sex);
+      formData.append("smell", productData.smell);
+      formData.append("origin", productData.origin);
+      formData.append("capacity", productData.capacity);
       formData.append("brand_name", productData.brand_name);
       formData.append("quantity", productData.quantity);
       formData.append("price", productData.price);
@@ -117,34 +117,17 @@ const UpdateProductForm = () => {
               type="text"
               id="product_name"
               name="product_name"
-              value={productData?.product_name}
+              value={productData?.product_name || ""}
               onChange={handleChange}
               required
             />
-          </div>
-          <div className="form-group">
-            <label htmlFor="type_name">Loại sản phẩm:</label>
-            <select
-              id="type_name"
-              name="type_name"
-              value={productData?.type_name}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Chọn loại sản phẩm</option>
-              {types.map((type) => (
-                <option key={type.id} value={type.type_name}>
-                  {type.type_name}
-                </option>
-              ))}
-            </select>
           </div>
           <div className="form-group">
             <label htmlFor="brand_name">Thương hiệu:</label>
             <select
               id="brand_name"
               name="brand_name"
-              value={productData?.brand_name}
+              value={productData?.brand_name || ""}
               onChange={handleChange}
               required
             >
@@ -157,12 +140,57 @@ const UpdateProductForm = () => {
             </select>
           </div>
           <div className="form-group">
+            <label htmlFor="sex">Giới tính:</label>
+            <input
+              type="text"
+              id="sex"
+              name="sex"
+              value={productData?.sex || ""}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="smell">Mùi hương:</label>
+            <input
+              type="text"
+              id="smell"
+              name="smell"
+              value={productData?.smell || ""}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="origin">Xuất xứ:</label>
+            <input
+              type="text"
+              id="origin"
+              name="origin"
+              value={productData?.origin || ""}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="capacity">Dung tích:</label>
+            <input
+              type="text"
+              id="capacity"
+              name="capacity"
+              value={productData?.capacity || ""}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          
+          <div className="form-group">
             <label htmlFor="quantity">Số lượng:</label>
             <input
               type="text"
               id="quantity"
               name="quantity"
-              value={productData?.quantity}
+              value={productData?.quantity || ""}
               onChange={handleChange}
               required
             />
@@ -173,7 +201,7 @@ const UpdateProductForm = () => {
               type="text"
               id="price"
               name="price"
-              value={productData?.price}
+              value={productData?.price || ""}
               onChange={handleChange}
               required
             />
@@ -184,14 +212,16 @@ const UpdateProductForm = () => {
               type="text"
               id="des"
               name="des"
-              value={productData?.des}
+              value={productData?.des || ""}
               onChange={handleChange}
               required
             />
           </div>
           <div className="form-group">
             <label htmlFor="image">Hình ảnh:</label>
-            <img src={productData?.image} alt={productData?.product_name}></img>
+            {productData?.image && (
+              <img src={productData.image} alt={productData.product_name} />
+            )}
             <input
               type="file"
               id="image"

@@ -15,7 +15,7 @@ const HomePage = () => {
     async function fetchData() {
       const _response = await get_products_async();
       console.log(_response.data);
-      setData(_response.data);
+      setData(_response.data.data);
     }
   }, []);
 
@@ -108,7 +108,11 @@ const HomePage = () => {
               {Array.from({ length: totalPages }, (_, index) => (
                 <button
                   key={index}
-                  className={`btn ${currentPage === index + 1 ? 'btn-primary' : 'btn-outline-primary'}`}
+                  className={`btn ${
+                    currentPage === index + 1
+                      ? "btn-primary"
+                      : "btn-outline-primary"
+                  }`}
                   onClick={() => handlePageChange(index + 1)}
                 >
                   {index + 1}

@@ -8,12 +8,17 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  localStorage.removeItem("token");
+  
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const data = await login(email, password);
+
+      // Lưu thông tin người dùng vào localStorage
+      localStorage.setItem("userData", JSON.stringify(data));
+
       if (data.role === "admin") {
         navigate("/admin");
       } else {

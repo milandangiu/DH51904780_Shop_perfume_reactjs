@@ -5,7 +5,10 @@ import "./../../../../assets/style/AddProductForm.scss"; // Import file CSS đ�
 const CreateProductForm = () => {
   const [productData, setProductData] = useState({
     product_name: "",
-    type_name: "",
+    sex: "",
+    smell: "",
+    origin: "",
+    capacity: "",
     brand_name: "",
     quantity: "",
     price: "",
@@ -15,27 +18,21 @@ const CreateProductForm = () => {
 
   const [errors, setErrors] = useState({}); // State để lưu trữ lỗi từ server
   const [brands, setBrands] = useState([]);
-  const [types, setTypes] = useState([]);
   const [message, setMessage] = useState(""); // State để lưu trữ thông báo
 
   useEffect(() => {
-    // Lấy danh sách thương hiệu và loại sản phẩm từ API
-    const fetchOptions = async () => {
+    // Lấy danh sách thương hiệu từ API
+    const fetchBrands = async () => {
       try {
-        const [brandRes, typeRes] = await Promise.all([
-          axios.get("http://127.0.0.1:8000/api/brands"),
-          axios.get("http://127.0.0.1:8000/api/types"),
-        ]);
+        const brandRes = await axios.get("http://127.0.0.1:8000/api/brands");
         console.log("Brands response:", brandRes.data); // Kiểm tra dữ liệu trả về từ API
-        console.log("Types response:", typeRes.data); // Kiểm tra dữ liệu trả về từ API
         setBrands(brandRes.data.data); // Truy cập mảng data từ API
-        setTypes(typeRes.data.data); // Truy cập mảng data từ API
       } catch (error) {
         console.error("Lỗi khi lấy dữ liệu:", error);
       }
     };
 
-    fetchOptions();
+    fetchBrands();
   }, []);
 
   const handleChange = (e) => {
@@ -63,7 +60,8 @@ const CreateProductForm = () => {
     } else {
       setErrors((prevErrors) => ({
         ...prevErrors,
-        image: "File không hợp lệ. Vui lòng chọn tệp ảnh (jpeg, png, jpg, gif).",
+        image:
+          "File không hợp lệ. Vui lòng chọn tệp ảnh (jpeg, png, jpg, gif).",
       }));
     }
   };
@@ -73,7 +71,10 @@ const CreateProductForm = () => {
     try {
       const formData = new FormData();
       formData.append("product_name", productData.product_name);
-      formData.append("type_name", productData.type_name);
+      formData.append("sex", productData.sex);
+      formData.append("smell", productData.smell);
+      formData.append("origin", productData.origin);
+      formData.append("capacity", productData.capacity);
       formData.append("brand_name", productData.brand_name);
       formData.append("quantity", productData.quantity);
       formData.append("price", productData.price);
@@ -95,7 +96,10 @@ const CreateProductForm = () => {
       // Đặt lại form về trạng thái ban đầu sau khi thêm thành công
       setProductData({
         product_name: "",
-        type_name: "",
+        sex: "",
+        smell: "",
+        origin: "",
+        capacity: "",
         brand_name: "",
         quantity: "",
         price: "",
@@ -117,7 +121,8 @@ const CreateProductForm = () => {
   return (
     <div className="add-product-form-container">
       <h2>Thêm sản phẩm mới</h2>
-      {message && <div className="message">{message}</div>} {/* Hiển thị thông báo */}
+      {message && <div className="message">{message}</div>}{" "}
+      {/* Hiển thị thông báo */}
       <form onSubmit={handleSubmit} className="add-product-form">
         <div className="form-group">
           <label htmlFor="product_name">Tên sản phẩm:</label>
@@ -129,23 +134,6 @@ const CreateProductForm = () => {
             onChange={handleChange}
             required
           />
-        </div>
-        <div className="form-group">
-          <label htmlFor="type_name">Loại sản phẩm:</label>
-          <select
-            id="type_name"
-            name="type_name"
-            value={productData.type_name}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Chọn loại sản phẩm</option>
-            {types.map((type) => (
-              <option key={type.id} value={type.type_name}>
-                {type.type_name}
-              </option>
-            ))}
-          </select>
         </div>
         <div className="form-group">
           <label htmlFor="brand_name">Thương hiệu:</label>
@@ -163,6 +151,50 @@ const CreateProductForm = () => {
               </option>
             ))}
           </select>
+        </div>
+        <div className="form-group">
+          <label htmlFor="sex">Giới tính:</label>
+          <input
+            type="text"
+            id="sex"
+            name="sex"
+            value={productData.sex}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="smell">Mùi hương:</label>
+          <input
+            type="text"
+            id="smell"
+            name="smell"
+            value={productData.smell}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="origin">Xuất xứ:</label>
+          <input
+            type="text"
+            id="origin"
+            name="origin"
+            value={productData.origin}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="capacity">Dung tích:</label>
+          <input
+            type="text"
+            id="capacity"
+            name="capacity"
+            value={productData.capacity}
+            onChange={handleChange}
+            required
+          />
         </div>
         <div className="form-group">
           <label htmlFor="quantity">Số lượng:</label>
@@ -187,16 +219,15 @@ const CreateProductForm = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="des">Mô tả:</label>
-          <input
-            type="text"
-            id="des"
-            name="des"
-            value={productData.des}
-            onChange={handleChange}
-            required
-          />
-        </div>
+                <label htmlFor="des">Mô tả:</label>
+                <textarea
+                  id="des"
+                  name="des"
+                  value={productData.des}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
         <div className="form-group">
           <label htmlFor="image">Hình ảnh:</label>
           <input
