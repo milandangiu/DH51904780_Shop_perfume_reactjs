@@ -33,6 +33,7 @@ import AdminTypeCreate from "pages/admin/dashboard/type/add";
 
 import Login from "pages/Login";
 import Register from "pages/Register";
+import OrderHistory from "pages/user/history";
 
 const App = () => {
   const routes = useRoutes([
@@ -64,6 +65,10 @@ const App = () => {
         {
           path: "cart",
           element: <Cart />,
+        },
+        {
+          path: "/history_orders",
+          element: <OrderHistory />,
         },
       ],
     },

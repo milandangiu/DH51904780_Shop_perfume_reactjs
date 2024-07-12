@@ -30,7 +30,6 @@ const UpdateProductForm = () => {
           axios.get("http://127.0.0.1:8000/api/brands"),
         ]);
         setBrands(brandRes.data.data);
-
       } catch (error) {
         console.error("Error fetching options:", error);
       }
@@ -141,14 +140,50 @@ const UpdateProductForm = () => {
           </div>
           <div className="form-group">
             <label htmlFor="sex">Giới tính:</label>
-            <input
-              type="text"
+            <select
               id="sex"
               name="sex"
               value={productData?.sex || ""}
               onChange={handleChange}
               required
-            />
+            >
+              <option value="Nam">Nam</option>
+              <option value="Nữ">Nữ</option>
+              <option value="Unisex">Unisex</option>
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="origin">Xuất xứ:</label>
+            <select
+              id="origin"
+              name="origin"
+              value={productData?.origin || ""}
+              onChange={handleChange}
+              required
+            >
+            <option value="Việt Nam">Việt Nam</option>
+            <option value="Pháp">Pháp</option>
+            <option value="Mỹ">Mỹ</option>
+            <option value="Hàn quốc">Hàn quốc</option>
+            <option value="Nhật Bản">Nhật Bản</option>
+            <option value="Dubai">Dubai</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label htmlFor="capacity">Dung tích:</label>
+            <select
+              id="capacity"
+              name="capacity"
+              value={productData?.capacity || ""}
+              onChange={handleChange}
+              required
+            >
+              <option value="50ml">50ml</option>
+              <option value="100ml">100ml</option>
+              <option value="200ml">200ml</option>
+              {/* Thêm các option khác tùy theo nhu cầu */}
+            </select>
           </div>
           <div className="form-group">
             <label htmlFor="smell">Mùi hương:</label>
@@ -161,29 +196,6 @@ const UpdateProductForm = () => {
               required
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="origin">Xuất xứ:</label>
-            <input
-              type="text"
-              id="origin"
-              name="origin"
-              value={productData?.origin || ""}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="capacity">Dung tích:</label>
-            <input
-              type="text"
-              id="capacity"
-              name="capacity"
-              value={productData?.capacity || ""}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          
           <div className="form-group">
             <label htmlFor="quantity">Số lượng:</label>
             <input
@@ -208,8 +220,7 @@ const UpdateProductForm = () => {
           </div>
           <div className="form-group">
             <label htmlFor="des">Mô tả:</label>
-            <input
-              type="text"
+            <textarea
               id="des"
               name="des"
               value={productData?.des || ""}
@@ -238,4 +249,5 @@ const UpdateProductForm = () => {
     </div>
   );
 };
+
 export default UpdateProductForm;

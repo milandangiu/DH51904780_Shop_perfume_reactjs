@@ -1,28 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { get_product_detail_async } from "../../../api/product";
-
 import axios from "axios";
-
-
 import "./Product.scss";
 
 const ProductDetail = () => {
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
-  const [relatedProducts, setRelatedProducts] = useState([]); // Assuming relatedProducts is fetched and stored here
-  const [cart, setCart] = useState([]);
+  const [relatedProducts, setRelatedProducts] = useState([]);
+  const [message, setMessage] = useState(""); // State for message
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await get_product_detail_async(id);
         setProduct(response.data);
-
-        // Example: Fetch related products
-        // const relatedResponse = await fetchRelatedProducts(id);
-        // setRelatedProducts(relatedResponse.data);
 
         // Dummy related products for testing
         setRelatedProducts([
@@ -63,48 +56,47 @@ const ProductDetail = () => {
       currency: "VND",
     }).format(price);
   };
+
   const handleAddToCart = async () => {
     if (!product) {
       console.error("Không có sản phẩm để thêm vào giỏ hàng.");
       return;
     }
-  
+
     try {
-      // Lấy userData từ localStorage
       const userData = localStorage.getItem("userData");
       if (!userData) {
         console.error("Không có thông tin người dùng trong localStorage.");
         return;
       }
-  
-      // Parse userData thành đối tượng JavaScript
+
       const userInfo = JSON.parse(userData);
       const user_id = userInfo.id;
-  
-      // Gửi yêu cầu POST đến API để thêm sản phẩm vào giỏ hàng
+
       const response = await axios.post("http://127.0.0.1:8000/api/cart/add", {
         product_id: product.id,
-        quantity: 1, // Số lượng mặc định
+        quantity: quantity,
         user_id: user_id,
       });
-  
+
       console.log("Thêm vào giỏ hàng thành công:", response.data);
-  
-      // Xử lý thành công, có thể cập nhật giao diện người dùng ở đây
+      setMessage("Sản phẩm đã được thêm vào giỏ hàng thành công!"); // Set success message
+
+      // Xóa thông báo sau 3 giây
+      setTimeout(() => {
+        setMessage("");
+      }, 3000);
     } catch (error) {
       console.error("Lỗi khi thêm vào giỏ hàng:", error);
-  
-      // Hiển thị thông báo lỗi cho người dùng nếu cần thiết
+      setMessage("Lỗi khi thêm sản phẩm vào giỏ hàng."); // Set error message
     }
   };
-  // Function to render related products
+
   const renderRelatedProducts = () => {
-    // Lọc các sản phẩm cùng brand_name với sản phẩm hiện tại
     const filteredProducts = relatedProducts.filter(
-      (product) => product.brand_name === product.brand_name
+      (relatedProduct) => relatedProduct.brand_name === product.brand_name
     );
 
-    // Giới hạn số lượng sản phẩm hiển thị là 3
     const limitedProducts = filteredProducts.slice(0, 3);
     return limitedProducts.map((relatedProduct) => (
       <div key={relatedProduct.id} className="col mb-5">
@@ -189,6 +181,7 @@ const ProductDetail = () => {
                   Thêm vào giỏ hàng
                 </button>
               </div>
+              {message && <div className="alert alert-info mt-3">{message}</div>}
             </div>
           </div>
           <div className="mt-4">

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Cart.scss'; // Ensure you have the CSS file for styling
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
-const CheckoutForm = ({ onSubmit }) => {
+const CheckoutForm = ({ onSubmit, userId }) => {
   const [formData, setFormData] = useState({
     name: '',
     address: '',
     phone: '',
+    email: '',
     paymentMethod: 'tm', // mac dinh
   });
 
@@ -20,11 +22,14 @@ const CheckoutForm = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData);
+    onSubmit({  
+      ...formData,
+      userId: userId, // Add userId to the order data
+    });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="checkout-form">
       <div>
         <label htmlFor="name">Tên:</label>
         <input
@@ -59,6 +64,17 @@ const CheckoutForm = ({ onSubmit }) => {
         />
       </div>
       <div>
+        <label htmlFor="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
         <label htmlFor="paymentMethod">Hình thức thanh toán:</label>
         <select
           id="paymentMethod"
@@ -80,6 +96,8 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [userId, setUserId] = useState(null); // State to hold user_id
+  const navigate = useNavigate(); // Use useNavigate hook
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -89,7 +107,9 @@ const Cart = () => {
           throw new Error('User information not found.');
         }
 
-        const response = await axios.get(`http://127.0.0.1:8000/api/cart/${userData.id}`);
+        const userId = userData.id; // Extract user_id from userData
+        setUserId(userId); // Set user_id state
+        const response = await axios.get(`http://127.0.0.1:8000/api/cart/${userId}`);
         setCartItems(response.data.cartItems);
       } catch (err) {
         setError(err.message);
@@ -102,23 +122,62 @@ const Cart = () => {
   }, []);
 
   const handleQuantityChange = (id, newQuantity) => {
-    setCartItems(cartItems.map(item =>
-      item.id === id ? { ...item, quantity: newQuantity } : item
-    ));
+    if (newQuantity > 0) { // Prevent quantity from being set to 0
+      setCartItems(cartItems.map(item =>
+        item.id === id ? { ...item, quantity: newQuantity } : item
+      ));
+      handleUpdateItemQuantity(id, newQuantity);
+    }
+  };
+
+  const handleUpdateItemQuantity = async (id, newQuantity) => {
+    try {
+      const response = await axios.put(`http://127.0.0.1:8000/api/cart/update/${id}`, {
+        quantity: newQuantity,
+      });
+      console.log('Cập nhật số lượng thành công:', response.data);
+    } catch (err) {
+      setError(err.message);
+      console.error('Lỗi khi cập nhật số lượng:', err);
+    }
   };
 
   const handleRemoveItem = async (id) => {
     try {
-      await axios.delete(`http://127.0.0.1:8000/api/cart/${id}`);
+      await axios.delete(`http://127.0.0.1:8000/api/cart/delete/${id}`);
       setCartItems(cartItems.filter(item => item.id !== id));
     } catch (err) {
       setError(err.message);
     }
   };
 
-  const handleCheckout = (formData) => {
-    // Logic to handle checkout with form data
-    console.log('Checkout with form data:', formData);
+  const handleCheckout = async (formData) => {
+    const totalPrice = cartItems.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
+
+    const orderData = {
+      name: formData.name,
+      address: formData.address,
+      phone: formData.phone,
+      email: formData.email,
+      paymentMethod: formData.paymentMethod,
+      items: cartItems.map(item => ({
+        productId: item.product.id,
+        quantity: item.quantity,
+        price: item.product.price,
+      })),
+      userId: userId,
+      total_price: totalPrice,
+    };
+
+    console.log('Dữ liệu gửi lên API:', orderData);
+
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/api/orders', orderData);
+      console.log('Checkout thành công:', response.data);
+      navigate('/history_orders'); // Chuyển sang trang lịch sử đơn hàng
+    } catch (error) {
+      console.error('Lỗi khi checkout:', error.response ? error.response.data : error.message);
+    }
   };
 
   if (loading) {
@@ -142,21 +201,24 @@ const Cart = () => {
                 <img src={item.product.image} alt={item.product.product_name} />
                 <div className="cart-item-details">
                   <p>{item.product.product_name}</p>
-                  <button onClick={() => handleRemoveItem(item.id)}>Xóa</button>
                   <div className="quantity">
-                    <button onClick={() => handleQuantityChange(item.id, item.quantity - 1)}>-</button>
+                    <button 
+                      onClick={() => handleQuantityChange(item.id, item.quantity - 1)} 
+                      disabled={item.quantity <= 1} // Disable decrease button if quantity is 1
+                    >-</button>
                     <input type="number" value={item.quantity} readOnly />
                     <button onClick={() => handleQuantityChange(item.id, item.quantity + 1)}>+</button>
                   </div>
                   <p>Đơn giá: {item.product.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
                   <p>Tổng tiền: {formatMoney(item.product.price * item.quantity)}</p>
                 </div>
+                <button onClick={() => handleRemoveItem(item.id)}>Xóa</button>
               </div>
             ))}
           </div>
           <div className="cart-summary">
-            <p>Tổng cộng: {formatMoney(cartItems.reduce((acc, item) => acc + item.product.price * item.quantity, 0))}</p>
-            <CheckoutForm onSubmit={handleCheckout} />
+            <p>Tổng tiền phải thanh toán: {formatMoney(cartItems.reduce((acc, item) => acc + item.product.price * item.quantity, 0))}</p>
+            <CheckoutForm onSubmit={handleCheckout} userId={userId} />
           </div>
         </div>
       )}

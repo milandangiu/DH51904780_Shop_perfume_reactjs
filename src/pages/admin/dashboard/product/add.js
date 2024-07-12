@@ -154,14 +154,52 @@ const CreateProductForm = () => {
         </div>
         <div className="form-group">
           <label htmlFor="sex">Giới tính:</label>
-          <input
-            type="text"
+          <select
             id="sex"
             name="sex"
             value={productData.sex}
             onChange={handleChange}
             required
-          />
+          >
+            <option value="">Chọn giới tính</option>
+            <option value="Nam">Nam</option>
+            <option value="Nữ">Nữ</option>
+            <option value="Unisex">Unisex</option>
+          </select>
+        </div>
+        
+        <div className="form-group">
+          <label htmlFor="origin">Xuất xứ:</label>
+          <select
+            id="origin"
+            name="origin"
+            value={productData.origin}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Chọn xuất xứ</option>
+            <option value="Việt Nam">Việt Nam</option>
+            <option value="Pháp">Pháp</option>
+            <option value="Mỹ">Mỹ</option>
+            <option value="Hàn quốc">Hàn quốc</option>
+            <option value="Nhật Bản">Nhật Bản</option>
+            <option value="Dubai">Dubai</option>
+          </select>
+        </div>
+        <div className="form-group">
+          <label htmlFor="capacity">Dung tích:</label>
+          <select
+            id="capacity"
+            name="capacity"
+            value={productData.capacity}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Chọn dung tích</option>
+            <option value="50ml">50ml</option>
+            <option value="100ml">100ml</option>
+            <option value="150ml">150ml</option>
+          </select>
         </div>
         <div className="form-group">
           <label htmlFor="smell">Mùi hương:</label>
@@ -170,28 +208,6 @@ const CreateProductForm = () => {
             id="smell"
             name="smell"
             value={productData.smell}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="origin">Xuất xứ:</label>
-          <input
-            type="text"
-            id="origin"
-            name="origin"
-            value={productData.origin}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="capacity">Dung tích:</label>
-          <input
-            type="text"
-            id="capacity"
-            name="capacity"
-            value={productData.capacity}
             onChange={handleChange}
             required
           />
@@ -219,15 +235,16 @@ const CreateProductForm = () => {
           />
         </div>
         <div className="form-group">
-                <label htmlFor="des">Mô tả:</label>
-                <textarea
-                  id="des"
-                  name="des"
-                  value={productData.des}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+          <label htmlFor="des">Mô tả:</label>
+          <textarea
+            id="des"
+            name="des"
+            value={productData.des}
+            onChange={handleChange}
+            required
+            className="resizeable-textarea"
+          />
+        </div>
         <div className="form-group">
           <label htmlFor="image">Hình ảnh:</label>
           <input

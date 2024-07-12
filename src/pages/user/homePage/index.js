@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { get_products_async } from "../../../api/product";
 import Content from "../theme/content";
 
+
 const HomePage = () => {
   const navigate = useNavigate();
   const [data, setData] = useState(null);
@@ -45,6 +46,12 @@ const HomePage = () => {
       setCurrentPage(currentPage - 1);
     }
   };
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    }).format(price);
+  };
 
   const productElements = currentProducts.map((product) => (
     <div
@@ -58,7 +65,7 @@ const HomePage = () => {
         <div className="card-body p-4">
           <div className="text-center">
             <h5 className="fw-bolder">{product.product_name}</h5>
-            {product.price}
+            {formatPrice(product.price)}
           </div>
         </div>
         <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">

@@ -88,3 +88,10 @@
   border-radius: 4px; /* Đặt border-radius */
   resize: vertical; /* Cho phép người dùng thay đổi kích thước theo chiều dọc */
 }
+.resizeable-textarea {
+  resize: vertical; /* Allow vertical resizing */
+  min-height: 100px; /* Set a minimum height */
+  max-height: 500px; /* Set a maximum height (optional) */
+  overflow: auto; /* Add scrollbar when needed */
+}
+

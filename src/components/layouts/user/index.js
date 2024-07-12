@@ -25,10 +25,12 @@ const AnonymousLayout = () => {
 
   
   return (
-    <div>
+    <div id="root">
       <Header isLogin={isLogin} setLogin={setIsLogin} user={user}></Header>
-      <Outlet />
-      <Footer></Footer>
+      <div className="main-content">
+        <Outlet />
+      </div>
+      <Footer className="footer"></Footer>
     </div>
   );
 };

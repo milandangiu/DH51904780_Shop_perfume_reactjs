@@ -34,7 +34,7 @@ const Sidebar = () => {
                 </ul>
               )}
             </li>
-            <li>
+            {/* <li>
               <Link to="#" onClick={() => toggleSubMenu("types")}>
                 Loại sản phẩm
               </Link>
@@ -48,7 +48,7 @@ const Sidebar = () => {
                   </li>
                 </ul>
               )}
-            </li>
+            </li> */}
             <li>
               <Link to="#" onClick={() => toggleSubMenu("brands")}>
                 Thương hiệu
