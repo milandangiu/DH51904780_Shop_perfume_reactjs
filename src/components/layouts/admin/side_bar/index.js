@@ -65,6 +65,18 @@ const Sidebar = () => {
               )}
             </li>
             <li>
+              <Link to="#" onClick={() => toggleSubMenu("orders")}>
+                Quản lý đơn hàng
+              </Link>
+              {openSubMenu === "orders" && (
+                <ul className="sub-menu">
+                  <li>
+                    <Link to="/admin/view-orders">Danh sách đơn hàng</Link>
+                  </li>
+                </ul>
+              )}
+            </li>
+            <li>
               <a href="/login">
                 <i className="fa fa-user"></i>
                 <span>Login Page</span>

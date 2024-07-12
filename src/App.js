@@ -34,6 +34,7 @@ import AdminTypeCreate from "pages/admin/dashboard/type/add";
 import Login from "pages/Login";
 import Register from "pages/Register";
 import OrderHistory from "pages/user/history";
+import OrderList from "pages/admin/dashboard/order/view";
 
 const App = () => {
   const routes = useRoutes([
@@ -70,6 +71,7 @@ const App = () => {
           path: "/history_orders",
           element: <OrderHistory />,
         },
+        
       ],
     },
     {
@@ -108,6 +110,10 @@ const App = () => {
         {
           path: "add-type",
           element: <AdminTypeCreate />,
+        },
+        {
+          path: "view-orders",
+          element: <OrderList />,
         },
 
       ],

@@ -1,0 +1,209 @@
+// /* style.scss */
+
+// .home-page {
+//     font-family: 'Arial', sans-serif;
+//     background-color: #f8f9fa;
+//     padding-bottom: 60px; /* Ensure space for footer */
+//   }
+  
+//   .home-page header {
+//     background-color: #343a40;
+//     color: #ffffff;
+//     padding: 40px 0;
+//   }
+  
+//   .home-page header h1 {
+//     font-size: 3rem;
+//     font-weight: bold;
+//   }
+  
+//   .home-page header p {
+//     font-size: 1.5rem;
+//   }
+  
+//   .home-page section {
+//     padding: 40px 0;
+//   }
+  
+//   .home-page .product-card {
+//     border: 1px solid #dee2e6;
+//     border-radius: 8px;
+//     background-color: #ffffff;
+//     transition: transform 0.2s ease;
+//   }
+  
+//   .home-page .product-card:hover {
+//     transform: translateY(-5px);
+//   }
+  
+//   .home-page .product-card .card-img-top {
+//     height: 250px;
+//     object-fit: cover;
+//     border-top-left-radius: 8px;
+//     border-top-right-radius: 8px;
+//   }
+  
+//   .home-page .product-card .card-body {
+//     padding: 20px;
+//   }
+  
+//   .home-page .product-card .card-title {
+//     font-size: 1.2rem;
+//     font-weight: bold;
+//   }
+  
+//   .home-page .product-card .card-text {
+//     margin-top: 10px;
+//     font-size: 1rem;
+//   }
+  
+//   .home-page .pagination {
+//     margin-top: 20px;
+//   }
+  
+//   .home-page .pagination .page-link {
+//     color: #007bff;
+//   }
+  
+//   .home-page .pagination .page-item.active .page-link {
+//     background-color: #007bff;
+//     border-color: #007bff;
+//     color: #ffffff;
+//   }
+  
+//   .home-page .pagination .page-item.disabled .page-link {
+//     color: #6c757d;
+//     pointer-events: none;
+//   }
+  
+//   .home-page .pagination .page-link:hover {
+//     background-color: #e9ecef;
+//   }
+  
+//   .home-page .pagination .page-item:first-child .page-link,
+//   .home-page .pagination .page-item:last-child .page-link {
+//     border-radius: 5px;
+//   }
+  
+//   /* Styling for search input */
+//   .home-page .search-input {
+//     width: 100%;
+//     padding: 12px 15px;
+//     font-size: 1rem;
+//     border: 2px solid #ced4da;
+//     border-radius: 5px;
+//     transition: border-color 0.2s ease;
+//     margin-bottom: 20px; /* Add some spacing below the search input */
+//   }
+  
+//   .home-page .search-input:focus {
+//     outline: none;
+//     border-color: #007bff;
+//     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+//   }
+  /* style.scss */
+
+.home-page {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    padding-bottom: 60px; /* Ensure space for footer */
+  }
+  
+  .home-page header {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 40px 0;
+  }
+  
+  .home-page header h1 {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  
+  .home-page header p {
+    font-size: 1.5rem;
+  }
+  
+  .home-page section {
+    padding: 40px 0;
+  }
+  
+  .home-page .product-card {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    background-color: #ffffff;
+    transition: transform 0.2s ease;
+  }
+  
+  .home-page .product-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .home-page .product-card .card-img-top {
+    height: 250px;
+    object-fit: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  
+  .home-page .product-card .card-body {
+    padding: 20px;
+  }
+  
+  .home-page .product-card .card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .home-page .product-card .card-text {
+    margin-top: 10px;
+    font-size: 1rem;
+  }
+  
+  .home-page .pagination {
+    margin-top: 20px;
+  }
+  
+  .home-page .pagination .page-link {
+    color: #007bff;
+  }
+  
+  .home-page .pagination .page-item.active .page-link {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #ffffff;
+  }
+  
+  .home-page .pagination .page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+  }
+  
+  .home-page .pagination .page-link:hover {
+    background-color: #e9ecef;
+  }
+  
+  .home-page .pagination .page-item:first-child .page-link,
+  .home-page .pagination .page-item:last-child .page-link {
+    border-radius: 5px;
+  }
+  
+  /* Styling for search input and filters */
+  .home-page .search-input,
+  .home-page .form-control {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border: 2px solid #ced4da;
+    border-radius: 5px;
+    transition: border-color 0.2s ease;
+    margin-bottom: 20px; /* Add some spacing below the search input */
+  }
+  
+  .home-page .search-input:focus,
+  .home-page .form-control:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+  

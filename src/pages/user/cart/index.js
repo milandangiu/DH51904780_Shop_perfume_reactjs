@@ -9,7 +9,7 @@ const CheckoutForm = ({ onSubmit, userId }) => {
     address: '',
     phone: '',
     email: '',
-    paymentMethod: 'tm', // mac dinh
+    paymentMethod: 'tiền mặt',
   });
 
   const handleChange = (e) => {
@@ -209,7 +209,7 @@ const Cart = () => {
                     <input type="number" value={item.quantity} readOnly />
                     <button onClick={() => handleQuantityChange(item.id, item.quantity + 1)}>+</button>
                   </div>
-                  <p>Đơn giá: {item.product.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
+                  <p>Đơn giá: {formatMoney(item.product.price)}</p>
                   <p>Tổng tiền: {formatMoney(item.product.price * item.quantity)}</p>
                 </div>
                 <button onClick={() => handleRemoveItem(item.id)}>Xóa</button>

@@ -1,0 +1,81 @@
+/* Header.css */
+
+.navbar-brand h1 {
+    font-family: 'Arial', sans-serif;
+    font-size: 2rem;
+    color: #333;
+    margin: 0;
+  }
+  
+  .nav-link, .nav-dropdown-toggle {
+    font-size: 1rem;
+    color: #555 !important;
+    margin-right: 1rem;
+  }
+  
+  .nav-link:hover, .nav-dropdown-toggle:hover {
+    color: #007bff !important;
+  }
+  
+  .navbar {
+    padding: 1rem 2rem;
+    background-color: #f8f9fa !important;
+  }
+  
+  .navbar-toggler {
+    border: none;
+  }
+  
+  .navbar-toggler-icon {
+    color: #333;
+  }
+  
+  .navbar-collapse {
+    justify-content: space-between;
+  }
+  
+  .cart-link {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .cart-link:hover {
+    color: #007bff;
+  }
+  
+  .cart-icon {
+    margin-right: 0.5rem;
+  }
+  
+  .cart-badge {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .user-dropdown .dropdown-toggle {
+    font-size: 1rem;
+    color: #555 !important;
+  }
+  
+  .user-dropdown .dropdown-toggle:hover {
+    color: #007bff !important;
+  }
+  
+  .dropdown-menu {
+    font-size: 1rem;
+  }
+  
+  .logout-button {
+    background: none;
+    border: none;
+    color: #555;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  .logout-button:hover {
+    color: #007bff;
+  }
+  

@@ -153,16 +153,20 @@ const ProductDetail = () => {
                 </span>
               </div>
               <div>
-                <span className="product-info">Mùi hương: {product.smell}</span>
+                <span className="product-info">Thương hiệu: {product.brand_name}</span>
               </div>
+              <div>
+                <span className="product-info">Xuất xứ: {product.origin}</span>
+              </div>
+              <div>
+                <span className="product-info">Mùi hương: {product.smell}</span>
+              </div>    
               <div>
                 <span className="product-info">
                   Dung tích: {product.capacity}
                 </span>
               </div>
-              <div>
-                <span className="product-info">Xuất xứ: {product.origin}</span>
-              </div>
+              
 
               <div className="d-flex align-items-center mt-4">
                 <input
@@ -193,10 +197,10 @@ const ProductDetail = () => {
 
       <section className="py-5 bg-light">
         <div className="container px-4 px-lg-5 mt-5">
-          <h2 className="fw-bolder mb-4">Cùng thương hiệu</h2>
+          {/* <h2 className="fw-bolder mb-4">Cùng thương hiệu</h2>
           <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             {renderRelatedProducts()}
-          </div>
+          </div> */}
         </div>
       </section>
     </div>
