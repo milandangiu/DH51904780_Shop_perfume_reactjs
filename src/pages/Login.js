@@ -15,22 +15,22 @@ const Login = () => {
     e.preventDefault();
     try {
       const data = await login(email, password);
-
-      // Lưu thông tin người dùng vào localStorage
-      localStorage.setItem("userData", JSON.stringify(data));
-
+  
+      // Lưu thông tin người dùng vào localStorage theo vai trò
       if (data.role === "admin") {
+        localStorage.setItem("adminData", JSON.stringify(data));
         navigate("/admin");
       } else {
+        localStorage.setItem("userData", JSON.stringify(data));
         navigate("/home");
         window.location.reload();
       }
+  
       // Chuyển hướng đến dashboard sau khi đăng nhập thành công
     } catch (err) {
       setError("Đăng nhập thất bại. Vui lòng kiểm tra lại email và mật khẩu.");
     }
   };
-
   return (
     <div className="log-w3">
       <div className="w3layouts-main">

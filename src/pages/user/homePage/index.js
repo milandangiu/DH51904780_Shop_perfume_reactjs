@@ -195,6 +195,7 @@ const HomePage = () => {
         </div>
       </section>
       <Content />
+      
     </div>
   );
 };

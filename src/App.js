@@ -35,6 +35,7 @@ import Login from "pages/Login";
 import Register from "pages/Register";
 import OrderHistory from "pages/user/history";
 import OrderList from "pages/admin/dashboard/order/view";
+import OrderDetail from "pages/user/order_detail";
 
 const App = () => {
   const routes = useRoutes([
@@ -70,6 +71,10 @@ const App = () => {
         {
           path: "/history_orders",
           element: <OrderHistory />,
+        },
+        {
+          path: "/history_orders/order_detail/:id",
+          element: <OrderDetail />,
         },
         
       ],
