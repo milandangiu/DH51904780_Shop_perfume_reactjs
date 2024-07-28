@@ -28,6 +28,13 @@ import AdminBrandCreate from "pages/admin/dashboard/brand/add";
 //type
 import AdminTypeList from "pages/admin/dashboard/type/view";
 import AdminTypeCreate from "pages/admin/dashboard/type/add";
+//order
+
+
+//user
+
+
+
 
 
 
@@ -36,6 +43,9 @@ import Register from "pages/Register";
 import OrderHistory from "pages/user/history";
 import OrderList from "pages/admin/dashboard/order/view";
 import OrderDetail from "pages/user/order_detail";
+import UserProfile from "pages/user/profile";
+import AdminOrderDetail from "pages/admin/dashboard/order/update";
+import UserList from "pages/admin/dashboard/user";
 
 const App = () => {
   const routes = useRoutes([
@@ -65,7 +75,7 @@ const App = () => {
           element: <ProductDetail />,
         },
         {
-          path: "cart",
+          path: "/cart",
           element: <Cart />,
         },
         {
@@ -76,7 +86,10 @@ const App = () => {
           path: "/history_orders/order_detail/:id",
           element: <OrderDetail />,
         },
-        
+        {
+          path: "/profile",
+          element: <UserProfile />,
+        },
       ],
     },
     {
@@ -120,7 +133,14 @@ const App = () => {
           path: "view-orders",
           element: <OrderList />,
         },
-
+        {
+          path: "view-orders/order_detail/:id",
+          element: <AdminOrderDetail />,
+        },
+        {
+          path: "view-users",
+          element: <UserList />,
+        },
       ],
     },
   ]);

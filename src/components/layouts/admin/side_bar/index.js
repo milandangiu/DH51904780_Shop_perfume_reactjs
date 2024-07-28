@@ -26,29 +26,14 @@ const Sidebar = () => {
               {openSubMenu === "products" && (
                 <ul className="sub-menu">
                   <li>
-                    <Link to="add-product">Thêm sản phẩm </Link>
+                    <Link to="add-product">* Thêm sản phẩm </Link>
                   </li>
                   <li>
-                    <Link to="/admin/products">Danh sách sản phẩm</Link>
+                    <Link to="/admin/products">* Danh sách sản phẩm</Link>
                   </li>
                 </ul>
               )}
             </li>
-            {/* <li>
-              <Link to="#" onClick={() => toggleSubMenu("types")}>
-                Loại sản phẩm
-              </Link>
-              {openSubMenu === "types" && (
-                <ul className="sub-menu">
-                  <li>
-                    <Link to="add-type">Thêm loại sản phẩm</Link>
-                  </li>
-                  <li>
-                    <Link to="/admin/types">Danh sách loại sản phẩm</Link>
-                  </li>
-                </ul>
-              )}
-            </li> */}
             <li>
               <Link to="#" onClick={() => toggleSubMenu("brands")}>
                 Thương hiệu
@@ -56,10 +41,10 @@ const Sidebar = () => {
               {openSubMenu === "brands" && (
                 <ul className="sub-menu">
                   <li>
-                    <Link to="add-brand">Thêm loại thương hiệu</Link>
+                    <Link to="add-brand">* Thêm loại thương hiệu</Link>
                   </li>
                   <li>
-                    <Link to="/admin/brands">Danh sách thương hiệu</Link>
+                    <Link to="/admin/brands">* Danh sách thương hiệu</Link>
                   </li>
                 </ul>
               )}
@@ -71,16 +56,22 @@ const Sidebar = () => {
               {openSubMenu === "orders" && (
                 <ul className="sub-menu">
                   <li>
-                    <Link to="/admin/view-orders">Danh sách đơn hàng</Link>
+                    <Link to="/admin/view-orders">* Danh sách đơn hàng</Link>
                   </li>
                 </ul>
               )}
             </li>
             <li>
-              <a href="/login">
-                <i className="fa fa-user"></i>
-                <span>Login Page</span>
-              </a>
+              <Link to="#" onClick={() => toggleSubMenu("users")}>
+                Quản lý khách hàng
+              </Link>
+              {openSubMenu === "users" && (
+                <ul className="sub-menu">
+                  <li>
+                    <Link to="/admin/view-users">* Danh sách khách hàng</Link>
+                  </li>
+                </ul>
+              )}
             </li>
           </ul>
         </div>

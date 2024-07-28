@@ -9,7 +9,7 @@ const CreateProductForm = () => {
     smell: "",
     origin: "",
     capacity: "",
-    brand_name: "",
+    brand_id: "",
     quantity: "",
     price: "",
     des: "",
@@ -75,7 +75,7 @@ const CreateProductForm = () => {
       formData.append("smell", productData.smell);
       formData.append("origin", productData.origin);
       formData.append("capacity", productData.capacity);
-      formData.append("brand_name", productData.brand_name);
+      formData.append("brand_id", productData.brand_id);
       formData.append("quantity", productData.quantity);
       formData.append("price", productData.price);
       formData.append("des", productData.des);
@@ -92,6 +92,7 @@ const CreateProductForm = () => {
         }
       );
       console.log("Thêm sản phẩm thành công:", response.data);
+      window.alert("thêm sản phẩm thành công");
 
       // Đặt lại form về trạng thái ban đầu sau khi thêm thành công
       setProductData({
@@ -100,18 +101,18 @@ const CreateProductForm = () => {
         smell: "",
         origin: "",
         capacity: "",
-        brand_name: "",
+        brand_id: "",
         quantity: "",
         price: "",
         des: "",
         image: "",
       });
-      window.alert("Thêm sản phẩm thành công!");
+      setMessage("");
     } catch (error) {
       console.error("Lỗi khi thêm sản phẩm:", error);
-      window.alert("Lỗi khi thêm sản phẩm. Vui lòng thử lại.");
+      setMessage("");
+      window.alert("thêm sản phẩm thất bại, kiểm tra tên sản phẩm bị trùng!");
     }
-
     // Xóa thông báo sau 3 giây
     // setTimeout(() => {
     //   setMessage("");
@@ -136,17 +137,17 @@ const CreateProductForm = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="brand_name">Thương hiệu:</label>
+          <label htmlFor="brand_id">Thương hiệu:</label>
           <select
-            id="brand_name"
-            name="brand_name"
-            value={productData.brand_name}
+            id="brand_id"
+            name="brand_id"
+            value={productData.brand_id}
             onChange={handleChange}
             required
           >
             <option value="">Chọn thương hiệu</option>
             {brands.map((brand) => (
-              <option key={brand.id} value={brand.brand_name}>
+              <option key={brand.id} value={brand.id}>
                 {brand.brand_name}
               </option>
             ))}
@@ -167,7 +168,6 @@ const CreateProductForm = () => {
             <option value="Unisex">Unisex</option>
           </select>
         </div>
-        
         <div className="form-group">
           <label htmlFor="origin">Xuất xứ:</label>
           <select
@@ -180,10 +180,8 @@ const CreateProductForm = () => {
             <option value="">Chọn xuất xứ</option>
             <option value="Việt Nam">Việt Nam</option>
             <option value="Pháp">Pháp</option>
-            <option value="Mỹ">Mỹ</option>
-            <option value="Hàn quốc">Hàn quốc</option>
-            <option value="Nhật Bản">Nhật Bản</option>
-            <option value="Dubai">Dubai</option>
+            <option value="Ý">Ý</option>
+            
           </select>
         </div>
         <div className="form-group">
@@ -254,6 +252,8 @@ const CreateProductForm = () => {
             onChange={handleFileChange}
             required
           />
+          {errors.image && <p className="error">{errors.image}</p>}{" "}
+          {/* Hiển thị lỗi liên quan đến ảnh nếu có */}
         </div>
         <button type="submit" className="btn-submit">
           Thêm sản phẩm

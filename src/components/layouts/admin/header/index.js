@@ -7,14 +7,15 @@ function Header() {
   const handleLogout = () => {
     const confirmLogout = window.confirm('Bạn có muốn đăng xuất không?');
     if (confirmLogout) {
-        navigate('/login');
-      }
+      localStorage.clear();
+      navigate('/home');
+    }
   };
 
   return (
     <div className="top-nav clearfix">
       <ul className="nav pull-right top-menu">
-        <span className="username">Xin chào</span>
+        <span className="username">Xin chào ADMIN</span>
         <button onClick={handleLogout} className="logout-button">
           Đăng xuất
         </button>

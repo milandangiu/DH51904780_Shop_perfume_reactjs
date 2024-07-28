@@ -1,66 +1,39 @@
+/* header.scss */
 .top-nav {
-  background-color: #f3f3f3; /* Màu nền của top navigation */
-  padding: 10px; /* Khoảng cách lề */
-  border-bottom: 1px solid #ddd; /* Viền đáy */
+  background: #2f4050;
+  color: #fff;
+  padding: 8px;
   position: fixed;
   width: 100%;
-}
+  z-index: 1000;
+  top: 0;
 
-.top-nav .nav.pull-right.top-menu {
-  display: flex; /* Sử dụng Flexbox cho phần tử cha */
-  justify-content: flex-end; /* Căn các phần tử con về phía bên phải */
-  align-items: center; /* Căn giữa các phần tử con theo chiều dọc */
-  list-style-type: none; /* Bỏ điểm li */
-  margin: 0; /* Xóa khoảng cách lề */
-  padding: 0; /* Xóa khoảng cách lề */
-}
+  .top-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 
-.top-nav .nav.pull-right.top-menu li {
-  margin-left: 10px; /* Khoảng cách giữa các mục menu */
-}
+    .username {
+      margin-right: 20px;
+      font-size: 16px;
+    }
 
-.top-nav .nav.pull-right.top-menu li.dropdown {
-  position: relative; /* Vị trí tương đối để menu dropdown hoạt động */
-}
+    .logout-button {
+      background: #d9534f;
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+      transition: background 0.3s;
 
-.top-nav .nav.pull-right.top-menu .dropdown-menu {
-  position: absolute; /* Vị trí tuyệt đối để menu dropdown hiển thị */
-  top: 100%; /* Hiển thị menu dropdown dưới nút dropdown */
-  right: 0; /* Đẩy menu dropdown sang phải */
-  z-index: 1000; /* Đảm bảo menu hiển thị trên các phần tử khác */
-  display: none; /* Ẩn menu dropdown ban đầu */
-  float: left; /* Float trái cho các mục menu */
-  min-width: 160px; /* Độ rộng tối thiểu của menu dropdown */
-  padding: 5px 0; /* Khoảng cách lề của menu dropdown */
-  margin: 2px 0 0; /* Khoảng cách lề của menu dropdown */
-  font-size: 14px; /* Kích thước chữ của menu dropdown */
-  text-align: left; /* Căn lề trái cho các mục trong menu dropdown */
-  background-color: #fff; /* Màu nền của menu dropdown */
-  border: 1px solid #ccc; /* Viền của menu dropdown */
-  border-radius: 4px; /* Độ cong viền của menu dropdown */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175); /* Đổ bóng cho menu dropdown */
-}
-
-.top-nav .nav.pull-right.top-menu .dropdown-menu li {
-  display: block; /* Hiển thị các mục menu dropdown dạng block */
-  padding: 3px 20px; /* Khoảng cách lề của các mục menu dropdown */
-  clear: both; /* Xóa tất cả các phần tử liền kề */
-  font-weight: normal; /* Chữ bình thường cho các mục menu dropdown */
-  line-height: 1.42857143; /* Chiều cao dòng của các mục menu dropdown */
-  white-space: nowrap; /* Không ngắt dòng cho các mục menu dropdown */
-}
-
-.top-nav .nav.pull-right.top-menu .dropdown-menu a {
-  display: block; /* Hiển thị các liên kết dạng block */
-  padding: 3px 20px; /* Khoảng cách lề của các liên kết */
-  clear: both; /* Xóa tất cả các phần tử liền kề */
-  font-weight: normal; /* Chữ bình thường cho các liên kết */
-  line-height: 1.42857143; /* Chiều cao dòng của các liên kết */
-  color: #333; /* Màu chữ của các liên kết */
-  white-space: nowrap; /* Không ngắt dòng cho các liên kết */
-}
-
-.top-nav .nav.pull-right.top-menu .dropdown-menu a:hover {
-  text-decoration: none; /* Bỏ gạch chân khi rê chuột qua liên kết */
-  background-color: #f5f5f5; /* Màu nền khi rê chuột qua liên kết */
+      &:hover {
+        background: #c9302c;
+      }
+    }
+  }
 }

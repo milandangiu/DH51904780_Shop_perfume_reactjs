@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import './style.scss';
 
-const OrderDetail = () => {
+const AdminOrderDetail = () => {
   const { id } = useParams();
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -75,4 +75,4 @@ const OrderDetail = () => {
   );
 }
 
-export default OrderDetail;
+export default AdminOrderDetail;

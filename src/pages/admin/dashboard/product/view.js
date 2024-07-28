@@ -71,7 +71,10 @@ const ListProduct = () => {
   };
 
   const formatPrice = (price) => {
-    return price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+    return new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    }).format(price);
   };
 
   const productElements = currentProducts.map((item) => (

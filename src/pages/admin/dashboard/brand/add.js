@@ -22,7 +22,7 @@ const CreateBrandForm = () => {
     try {
       const formData = new FormData();
       formData.append("brand_name", brandData.brand_name);
-      // Gọi API POST để thêm sản phẩm mới
+      // Gọi API POST để thêm thương hiệu mới
       const response = await axios.post(
         "http://127.0.0.1:8000/api/create-brand",
         formData,
@@ -32,16 +32,16 @@ const CreateBrandForm = () => {
           },
         }
       );
-      console.log("Thêm sản phẩm thành công:", response.data);
+      console.log("Thêm thương hiệu thành công:", response.data);
       // Đặt lại form về trạng thái ban đầu sau khi thêm thành công
       setBrandData({
         brand_name: "",
       });
 
-      window.alert("Thêm sản phẩm thành công!");
+      window.alert("Thêm thương hiệu thành công!");
     } catch (error) {
-      console.error("Lỗi khi thêm sản phẩm:", error);
-window.alert("Lỗi khi thêm sản phẩm. Vui lòng thử lại.");
+      console.error("Lỗi khi thêm thương hiệu:", error);
+window.alert("Lỗi khi thêm thương hiệu. Vui lòng thử lại.");
 
     }
   };

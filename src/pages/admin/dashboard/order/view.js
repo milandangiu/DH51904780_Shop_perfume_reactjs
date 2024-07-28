@@ -1,77 +1,161 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import './style.scss'; // Import file CSS
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import "../../../../assets/style/ListProduct.scss";
+import SelectBox from "../../../../components/share/selectbox";
 
 const OrderList = () => {
-    const [orders, setOrders] = useState([]);
+  const [orders, setOrders] = useState([]);
+  const [message, setMessage] = useState(""); // State để lưu trữ thông báo
+  const [currentPage, setCurrentPage] = useState(1); // State để lưu trữ trang hiện tại
+  const ordersPerPage = 10;
 
-    const fetchOrders = async () => {
-        try {
-            const userData = JSON.parse(localStorage.getItem('userData'));
-            if (!userData || !userData.token) {
-                throw new Error('User information or token not found.');
-            }
-
-            const response = await axios.get(`http://127.0.0.1:8000/api/orders/user/${userData.id}`, {
-                headers: {
-                    Authorization: `Bearer ${userData.token}`
-                }
-            });
-            setOrders(response.data.orders); // Assuming API returns { orders: [...] }
-        } catch (error) {
-            console.error('Error fetching orders:', error);
-        }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "http://127.0.0.1:8000/api/view-orders"
+        );
+        setOrders(response.data);
+      } catch (error) {
+        console.error("Error fetching orders:", error);
+      }
     };
 
-    useEffect(() => {
-        fetchOrders();
-    }, []); // Empty dependency array means fetchOrders runs once on component mount
+    fetchData();
+  }, []);
 
-    const handleUpdateStatus = async (orderId, newStatus) => {
-        try {
-            const userData = JSON.parse(localStorage.getItem('userData'));
-            if (!userData || !userData.token) {
-                throw new Error('User information or token not found.');
-            }
+  const indexOfLastOrder = currentPage * ordersPerPage;
+  const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
+  const currentOrders = orders.slice(indexOfFirstOrder, indexOfLastOrder);
+  const totalPages = Math.ceil(orders.length / ordersPerPage);
 
-            const response = await axios.put(`http://127.0.0.1:8000/api/orders/${orderId}/updateStatus`, { status: newStatus }, {
-                headers: {
-                    Authorization: `Bearer ${userData.token}`
-                }
-            });
-            console.log('Status updated:', response.data);
-            // Refresh order list after successful update
-            fetchOrders(); // Re-fetch orders to update the list
-        } catch (error) {
-            console.error('Error updating status:', error);
-            // Handle error, e.g., show error message
-        }
-    };
+  const handlePageChange = (newPage) => {
+    if (newPage > 0 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
 
-    return (
-        <div>
-            <h2>Order List</h2>
-            <ul className="order-list">
-                {orders.map(order => (
-                    <li key={order.id} className="order-item">
-                        <h3>Order #{order.id}</h3>
-                        <p>Status: {order.status}</p>
-                        <p>Total Price: ${order.total_price}</p>
-                        <div className="status-update-form">
-                            <label htmlFor={`status-${order.id}`}>Update Status:</label>
-                            <select id={`status-${order.id}`} onChange={(e) => handleUpdateStatus(order.id, e.target.value)}>
-                                <option value="Đã tiếp nhận">Đã tiếp nhận</option>
-                                <option value="Đang giao hàng">Đang giao hàng</option>
-                                <option value="Thành công">Thành công</option>
-                                <option value="Đã hủy">Đã hủy</option>
-                            </select>
-                            <button>Update</button>
-                        </div>
-                    </li>
-                ))}
-            </ul>
-        </div>
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    }).format(amount);
+  };
+
+  const handleEdit = (orderId) => {
+    console.log(`Chỉnh sửa đơn hàng có id: ${orderId}`);
+  };
+
+  const handleChangeStatus = async (id, value) => {
+    const response = await axios.post(
+      "http://127.0.0.1:8000/api/orders/update-orders-status",
+      {
+        orderId: id,
+        status: value,
+      }
     );
+    console.log(`${id} - ${value}`);
+  };
+
+  const orderElements = currentOrders.map((item) => (
+    <tr key={item.id}>
+      <td>{item.id}</td>
+      <td>{item.user_name}</td>
+      <td>
+        <SelectBox
+          itemId={item.id}
+          selectedFirst={item.status}
+          onOptionChange={handleChangeStatus}
+        />
+      </td>
+      <td>{formatCurrency(item.total_price)}</td>
+      <td>{item.payment_method}</td>
+      <td>{item.notes}</td>
+      <td>{new Date(item.created_at).toLocaleDateString()}</td>
+      <td>
+        {/* <button
+          className="btn btn-sm btn-default"
+          onClick={() => handleEdit(item.id)}
+        >
+          Cập nhật
+        </button> */}
+      </td>
+    </tr>
+  ));
+
+  return (
+    <section id="main-content">
+      <section className="wrapper">
+        <div className="table-agile-info">
+          <div className="panel panel-default">
+            {message && <div className="message">{message}</div>}
+            <div className="panel-heading">Danh sách đơn hàng</div>
+            <div className="table-responsive">
+              <table className="table table-striped b-t b-light">
+                <thead>
+                  <tr>
+                    <th>STT</th>
+                    <th>Họ và tên</th>
+                    <th>Trạng thái</th>
+                    <th>Tổng giá</th>
+                    <th>Hình thức thanh toán</th>
+                    <th>Ghi chú</th>
+                    <th>Ngày giao dịch</th>
+                    {/* <th>Thao tác</th> */}
+                  </tr>
+                </thead>
+                <tbody>{orderElements}</tbody>
+              </table>
+            </div>
+            <div className="d-flex justify-content-between">
+              <button
+                className="btn btn-outline-primary"
+                onClick={handlePreviousPage}
+                disabled={currentPage === 1}
+              >
+                &larr; Trước
+              </button>
+              <div className="pagination">
+                {Array.from({ length: totalPages }, (_, index) => (
+                  <button
+                    key={index}
+                    className={`btn ${
+                      currentPage === index + 1
+                        ? "btn-primary"
+                        : "btn-outline-primary"
+                    }`}
+                    onClick={() => handlePageChange(index + 1)}
+                  >
+                    {index + 1}
+                  </button>
+                ))}
+              </div>
+              <button
+                className="btn btn-outline-primary"
+                onClick={handleNextPage}
+                disabled={currentPage === totalPages}
+              >
+                Sau &rarr;
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+  );
 };
 
 export default OrderList;
